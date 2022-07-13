@@ -1,0 +1,65 @@
+<!-- 12Jul2022/Mar
+     Programa c:/Inet/Cubo.html
+     Icono    odo.ico
+     Soporte  three.js http://github.com/mrdoob/three.js
+     JDTorHz 2FB MX Autor drdoob.com
+     ............................................................... -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Cubo tridimensional</title>
+        <link rel="icon" type="image/x-icon" href="iconAnim01.ico">  
+		<style>
+			body {
+				background-color: #204070;                 /* rrggbb */
+				margin: 0;
+				overflow: hidden;                          /* ocultar barras laterales */
+			}
+		</style>
+	</head>
+	<body>
+		<script src="three.js"></script>                   <!-- se requieren 2 secciones de script -->
+
+        <script>       
+			var camera, scene, renderer;
+			var geometry, material, mesh;
+
+			var init = function () {
+
+				renderer = new THREE.CanvasRenderer();     // THREE pertenece al src externo
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				document.body.appendChild( renderer.domElement );
+
+				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
+				camera.position.z = 500;
+
+				scene = new THREE.Scene();
+
+				geometry = new THREE.CubeGeometry( 250, 250, 250 ); //tamaño del cubo
+				material = new THREE.MeshBasicMaterial( { color: 0x00FF00, wireframe: true, wireframeLinewidth: 5 } );
+
+				mesh = new THREE.Mesh( geometry, material );
+				scene.add( mesh );
+
+			}
+
+			var animate = function () {
+
+				requestAnimationFrame( animate );
+
+				mesh.rotation.x = Date.now() * 0.0005;
+				mesh.rotation.y = Date.now() * 0.0001;
+
+				renderer.render( scene, camera );
+
+			}
+
+			init();
+			animate();
+
+		</script>
+	</body>
+</html>
+<!-- ............................................................... -->
